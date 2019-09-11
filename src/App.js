@@ -8,8 +8,7 @@ import Total from './components/Total';
 
 export const store = createStore(reducer);
 
-const App = () => {
-  
+const App = () => {  
 
   const removeFeature = item => {
     // dispatch an action here to remove an item
