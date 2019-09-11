@@ -15,7 +15,7 @@ export const state = {
     ]
   };
 
-  export const reducer = (state, action) => {
+  export const reducer = (state = state, action) => {
 
     switch(action.type){
         
