@@ -28,8 +28,12 @@ const initialState = {
         return {           
 
             ...state, //return a modified version of our state object
+           
             car: {
                 ...state.car,//spread existing object
+
+                 //adds the cost of the added feature to the total price
+                price: state.car.price + action.payload.price,
                 features: [...state.car.features, action.payload] //appeand an item to the features array key to modify (features)
             }
         };
@@ -39,6 +43,9 @@ const initialState = {
                 ...state,
                 car: {
                     ...state.car,
+
+                    //subtracts the cost of the removed feature from the total price
+                    price: state.car.price - action.payload.price,
                     features: state.car.features.filter(feature => {
                         if(feature.id === action.payload.id){
                             return false;
