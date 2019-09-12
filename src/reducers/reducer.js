@@ -18,25 +18,37 @@ const initialState = {
     ]
   }
 
-   export const reducer = (state = initialState, action) => { 
-    console.log("action", action.type); 
+  
 
+   export const reducer = (state = initialState, action) => { 
+   
     switch(action.type){      
 
-        case ADD_FEATURE:               
-               
-        return {           
+        case ADD_FEATURE:  
 
-            ...state, //return a modified version of our state object
+        if (state.car.features.find(feature => feature.id === action.payload.id)) {
+            alert("you already added this feature!");
+            return state;
+          } else {          
+               
+        return {            
            
-            car: {
+
+            ...state, //return a modified version of our state object so spread state in here
+           
+            car: { 
                 ...state.car,//spread existing object
 
                  //adds the cost of the added feature to the total price
                 price: state.car.price + action.payload.price,
-                features: [...state.car.features, action.payload] //appeand an item to the features array key to modify (features)
+                features: [...state.car.features, action.payload] //appeand the features in action.payload to the features array
             }
-        };
+        }
+    };
+    
+
+    
+    
 
         case REMOVE_FEATURE:
             return {
