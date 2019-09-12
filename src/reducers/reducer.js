@@ -1,4 +1,7 @@
-export const state = {
+import { ADD_FEATURE } from '../actions/actions.js';
+import { REMOVE_FEATURE } from '../actions/actions.js';
+
+const initialState = {
     additionalPrice: 0,
     car: {
       price: 26395,
@@ -13,11 +16,43 @@ export const state = {
       { id: 3, name: 'Premium sound system', price: 500 },
       { id: 4, name: 'Rear spoiler', price: 250 }
     ]
-  };
+  }
 
-  export const reducer = (state = state, action) => {
+   export const reducer = (state = initialState, action) => { 
+    console.log("action", action.type); 
 
-    switch(action.type){
+    switch(action.type){      
+
+        case ADD_FEATURE:               
+               
+        return {           
+
+            ...state, //return a modified version of our state object
+            car: {
+                ...state.car,//spread existing object
+                features: [...state.car.features, action.payload] //appeand an item to the features array key to modify (features)
+            }
+        };
+
+        case REMOVE_FEATURE:
+            return {
+                ...state,
+                car: {
+                    ...state.car,
+                    features: state.car.features.filter(feature => {
+                        if(feature.id === action.payload.id){
+                            return false;
+
+                        }
+                        else {
+                            return true;
+                        }
+                    })
+                }
+
+            };
+
+           
         
         default:
             return state;
@@ -25,3 +60,5 @@ export const state = {
     }//end switch          
 
   }//end reducer
+
+ 

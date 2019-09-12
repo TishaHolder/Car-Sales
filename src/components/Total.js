@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { updateTotal } from '../actions/actions.js';
 
 const Total = props => {
   return (
